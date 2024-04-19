@@ -39,16 +39,17 @@ VALUES
 
 INSERT INTO Bezeroa (Izen, Abizena, Hizkuntza, Erabiltzailea, Pasahitza, Jaiotze_data, Erregistro_data, Mota) 
 VALUES 
-('John', 'Doe', 'EN', 'john_doe', '$10$rrhoqGX6mdu8VsNvBvXYl.oSj70ZQGU7ppiF019M53CKtsgCUmmfS', '1990-05-15', '2023-01-01', 'Free'),
-('Jane', 'Smith', 'EN', 'jane_smith', '$10$rrhoqGX6mdu8VsNvBvXYl.oSj70ZQGU7ppiF019M53CKtsgCUmmfS', '1992-08-20', '2023-01-02', 'Premium'),
-('Alice', 'Johnson', 'EN', 'alice_johnson', '$10$rrhoqGX6mdu8VsNvBvXYl.oSj70ZQGU7ppiF019M53CKtsgCUmmfS', '1985-12-10', '2023-01-03', 'Free'),
-('Bob', 'Brown', 'EN', 'bob_brown', '$10$rrhoqGX6mdu8VsNvBvXYl.oSj70ZQGU7ppiF019M53CKtsgCUmmfS', '1988-04-25', '2023-01-04', 'Premium'),
-('Charlie', 'Wilson', 'EN', 'charlie_wilson', '$10$rrhoqGX6mdu8VsNvBvXYl.oSj70ZQGU7ppiF019M53CKtsgCUmmfS', '1995-09-30', '2023-01-05', 'Free'),
-('Emma', 'Martinez', 'ES', 'emma_martinez', '$10$rrhoqGX6mdu8VsNvBvXYl.oSj70ZQGU7ppiF019M53CKtsgCUmmfS', '1998-02-18', '2023-01-06', 'Free'),
-('Michael', 'Garcia', 'ES', 'michael_garcia', '$10$rrhoqGX6mdu8VsNvBvXYl.oSj70ZQGU7ppiF019M53CKtsgCUmmfS', '1993-07-22', '2023-01-07', 'Free'),
-('Olivia', 'Lopez', 'ES', 'olivia_lopez', '$10$rrhoqGX6mdu8VsNvBvXYl.oSj70ZQGU7ppiF019M53CKtsgCUmmfS', '1987-11-12', '2023-01-08', 'Free'),
-('David', 'Rodriguez', 'ES', 'david_rodriguez', '$10$rrhoqGX6mdu8VsNvBvXYl.oSj70ZQGU7ppiF019M53CKtsgCUmmfS', '1980-03-08', '2023-01-09', 'Free'),
-('Sophia', 'Fernandez', 'ES', 'sophia_fernandez', '$10$rrhoqGX6mdu8VsNvBvXYl.oSj70ZQGU7ppiF019M53CKtsgCUmmfS', '1976-06-28', '2023-01-10', 'Free');
+('John', 'Doe', 'EN', 'john_doe', '$2a$10$u.U5anZzcNi5VRXyRgmr7.xmTclHT4LvDSFw.jKiAMvpVbmUu59eG', '1990-05-15', '2023-01-01', 'Free'),
+('Jane', 'Smith', 'EN', 'jane_smith', '$2a$10$u.U5anZzcNi5VRXyRgmr7.xmTclHT4LvDSFw.jKiAMvpVbmUu59eG', '1992-08-20', '2023-01-02', 'Premium'),
+('Alice', 'Johnson', 'EN', 'alice_johnson', '$2a$10$u.U5anZzcNi5VRXyRgmr7.xmTclHT4LvDSFw.jKiAMvpVbmUu59eG', '1985-12-10', '2023-01-03', 'Free'),
+('Bob', 'Brown', 'EN', 'bob_brown', '$2a$10$u.U5anZzcNi5VRXyRgmr7.xmTclHT4LvDSFw.jKiAMvpVbmUu59eG', '1988-04-25', '2023-01-04', 'Premium'),
+('Charlie', 'Wilson', 'EN', 'charlie_wilson', '$2a$10$u.U5anZzcNi5VRXyRgmr7.xmTclHT4LvDSFw.jKiAMvpVbmUu59eG', '1995-09-30', '2023-01-05', 'Free'),
+('Emma', 'Martinez', 'ES', 'emma_martinez', '$2a$10$u.U5anZzcNi5VRXyRgmr7.xmTclHT4LvDSFw.jKiAMvpVbmUu59eG', '1998-02-18', '2023-01-06', 'Free'),
+('Michael', 'Garcia', 'ES', 'michael_garcia', '$2a$10$u.U5anZzcNi5VRXyRgmr7.xmTclHT4LvDSFw.jKiAMvpVbmUu59eG', '1993-07-22', '2023-01-07', 'Free'),
+('Olivia', 'Lopez', 'ES', 'olivia_lopez', '$2a$10$u.U5anZzcNi5VRXyRgmr7.xmTclHT4LvDSFw.jKiAMvpVbmUu59eG', '1987-11-12', '2023-01-08', 'Free'),
+('David', 'Rodriguez', 'ES', 'david_rodriguez', '$2a$10$u.U5anZzcNi5VRXyRgmr7.xmTclHT4LvDSFw.jKiAMvpVbmUu59eG', '1980-03-08', '2023-01-09', 'Free'),
+('Sophia', 'Fernandez', 'ES', 'sophia_fernandez', '$2a$10$u.U5anZzcNi5VRXyRgmr7.xmTclHT4LvDSFw.jKiAMvpVbmUu59eG', '1976-06-28', '2023-01-10', 'Free');
+
 
 INSERT INTO Podcast (ID_Audio, Kolaboratzaileak, ID_Podcaster) 
 VALUES 
