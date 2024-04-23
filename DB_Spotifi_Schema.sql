@@ -103,10 +103,11 @@ primary key(ID_Bezeroa, ID_Audio)
 );
 
 create table Erreprodukzioak(
+ID_Erreprodukzioak int auto_increment,
 ID_Bezeroa int,
 ID_Audio char(5),
 Fecha date not null,
-primary key(ID_Bezeroa, ID_Audio, Fecha)
+primary key(ID_Erreprodukzioak)
 );
 
 create table Estadistikak(
