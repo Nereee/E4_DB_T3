@@ -112,7 +112,7 @@ primary key(ID_Erreprodukzioak)
 
 create table Estadistikak(
 ID_Audio char(5),
-KeyFigure1 varchar(1),
+KeyFigure1 varchar(1), 
 KeyFigure2 varchar(1),
 KeyFigure3 varchar(1),
 KeyFigure4 varchar(1),
