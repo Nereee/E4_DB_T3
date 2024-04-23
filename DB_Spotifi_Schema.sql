@@ -154,7 +154,7 @@ constraint FK_PlayListAbestiakAudio foreign key (ID_Audio) references Abestia (I
 
 alter table Bezeroa
 add
-constraint FK_BezeroaHizkuntza foreign key (Hizkuntza) references Hizkuntza (ID_Hizkuntza) on update cascade;
+constraint FK_BezeroaHizkuntza foreign key (Hizkuntza) references Hizkuntza (ID_Hizkuntza);
 
 
 alter table Premium
@@ -171,7 +171,7 @@ constraint FK_GustukoakAudio foreign key (ID_Audio) references Audio (ID_Audio) 
 
 alter table Erreprodukzioak
 add
-constraint FK_ErreprodukzioakBezeroa foreign key (ID_Bezeroa) references Bezeroa (ID_Bezeroa) on update cascade on delete cascade,
+constraint FK_ErreprodukzioakBezeroa foreign key (ID_Bezeroa) references Bezeroa (ID_Bezeroa),
 add
 constraint FK_ErreprodukzioakAudio foreign key (ID_Audio) references Audio (ID_Audio) on update cascade on delete cascade;
 
