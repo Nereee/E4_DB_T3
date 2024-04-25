@@ -6,12 +6,12 @@ VALUES
 ('a', 'a', 'EN', 'a', 'a', '1990-05-15', '2023-01-01', 'Free');
 --
 
-INSERT INTO Musikaria (ID_Musikaria, Izen_Artistikoa, Ezaugarria) 
+INSERT INTO Musikaria (ID_Musikaria, Izen_Artistikoa, Ezaugarria, Deskribapena) 
 VALUES 
-('MU001', 'Estopa', 'Taldea'),
-('MU002', 'Shakira', 'Bakarlaria'),
-('MU003', 'Ed Sheeran', 'Bakarlaria'),
-('MU004', 'Kurt Cobain', 'Bakarlaria');
+('MU001', 'Estopa', 'Taldea','aaaaa'),
+('MU002', 'Shakira', 'Bakarlaria','bbbbb'),
+('MU003', 'Ed Sheeran', 'Bakarlaria','ccccc'),
+('MU004', 'Kurt Cobain', 'Bakarlaria','ddddd');
 
 INSERT INTO Podcaster (ID_Podcaster, Izen_Artistikoa) 
 VALUES 
