@@ -45,6 +45,7 @@ group by p.Izen_artistikoa;
 
 drop view if exists AlbumView;
 create view AlbumView as
-select a.ID_Album as 'ID_Album', a.Izenburua as 'Izenburua', count(ab.ID_Audio) as 'Abestiak'
+select a.ID_Album as 'ID_Album', a.Izenburua as 'Izenburua', count(ab.ID_Audio) as 'Abestiak', m.ID_Musikaria
 from Album a inner join Abestia ab using(ID_Album)
+	inner join Musikaria m using(ID_Musikaria)
 group by a.ID_Album;
