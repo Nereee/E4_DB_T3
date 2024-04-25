@@ -13,6 +13,7 @@ ID_Musikaria char(5),
 Izen_Artistikoa varchar(20) not null,
 Irudia longblob,
 Ezaugarria enum("Bakarlaria", "Taldea") not null,
+Deskribapena varchar(200) not null,
 primary key(ID_Musikaria),
 unique(Izen_Artistikoa)
 );
@@ -78,6 +79,7 @@ ID_Album char(5),
 Izenburua varchar(20) not null,
 Urtea date not null,
 Generoa varchar(40) not null,
+Irudia blob,
 ID_Musikaria char(5) not null,
 primary key(ID_Album)
 );

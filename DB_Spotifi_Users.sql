@@ -66,6 +66,7 @@ GRANT 'Departamentu_burua' TO 'Departamentua'@'%';
 drop USER if exists 'Analist1'@'%';
 CREATE USER if not exists 'Analist1'@'%' IDENTIFIED BY 'Analist12345.';
 GRANT 'Analista' TO 'Analist1'@'%';
+
 drop USER if exists 'Analist2'@'%';
 CREATE USER if not exists 'Analist2'@'%' IDENTIFIED BY 'Analist12345.';
 GRANT 'Analista' TO 'Analist2'@'%';
