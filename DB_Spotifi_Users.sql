@@ -56,26 +56,26 @@ FLUSH PRIVILEGES;
 -- Users
 
 drop USER if exists 'Admin'@'%';
-CREATE USER if not exists 'Admin'@'%' IDENTIFIED BY 'Admin12345';
+CREATE USER if not exists 'Admin'@'%' IDENTIFIED BY 'Admin12345.';
 GRANT 'Administratzailea' TO 'Admin'@'%';
 
 drop USER if exists 'Departamentua'@'%';
-CREATE USER if not exists 'Departamentua'@'%' IDENTIFIED BY 'Depart12345';
+CREATE USER if not exists 'Departamentua'@'%' IDENTIFIED BY 'Depart12345.';
 GRANT 'Departamentu_burua' TO 'Departamentua'@'%';
 
 drop USER if exists 'Analist1'@'%';
-CREATE USER if not exists 'Analist1'@'%' IDENTIFIED BY 'Analist12345';
+CREATE USER if not exists 'Analist1'@'%' IDENTIFIED BY 'Analist12345.';
 GRANT 'Analista' TO 'Analist1'@'%';
 drop USER if exists 'Analist2'@'%';
-CREATE USER if not exists 'Analist2'@'%' IDENTIFIED BY 'Analist12345';
+CREATE USER if not exists 'Analist2'@'%' IDENTIFIED BY 'Analist12345.';
 GRANT 'Analista' TO 'Analist2'@'%';
 
 drop USER if exists 'Langile'@'%';
-CREATE USER if not exists 'Langile'@'%' IDENTIFIED BY 'Lang12345';
+CREATE USER if not exists 'Langile'@'%' IDENTIFIED BY 'Lang12345.';
 GRANT 'Langilea' TO 'Langile'@'%';
 
 drop USER if exists 'Bezero'@'%';
-CREATE USER if not exists 'Bezero'@'%' IDENTIFIED BY 'Bez12345';
+CREATE USER if not exists 'Bezero'@'%' IDENTIFIED BY 'Bez12345.';
 GRANT 'Bezeroa' TO 'Bezero'@'%';
 
 FLUSH PRIVILEGES;

@@ -23,3 +23,11 @@ select a.Izena, a.Iraupena, a.Mota, b.Erabiltzailea as 'Nortzuk entzun dute'
 from Audio a inner join Erreprodukzioak e using(ID_Audio)
 				inner join Bezeroa b using(ID_Bezeroa)
 where a.Izena = 'The Wild Proyect Podcast #1';
+
+
+drop view if exists playListView;
+create view playListView as
+select p.ID_List as 'ID_List', p.Izenburua as 'Izena', count(pa.ID_Audio) as 'Abestiak'
+from Playlist p inner join Playlist_Abestiak pa using(ID_List)
+group by p.ID_List;
+
