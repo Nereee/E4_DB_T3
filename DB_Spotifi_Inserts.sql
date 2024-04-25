@@ -1,11 +1,5 @@
 use DB_Sprotify;
 
--- kk user
-INSERT INTO Bezeroa (Izen, Abizena, Hizkuntza, Erabiltzailea, Pasahitza, Jaiotze_data, Erregistro_data, Mota) 
-VALUES 
-('a', 'a', 'EN', 'a', 'a', '1990-05-15', '2023-01-01', 'Free');
---
-
 INSERT INTO Musikaria (ID_Musikaria, Izen_Artistikoa, Ezaugarria, Deskribapena) 
 VALUES 
 ('MU001', 'Estopa', 'Taldea','aaaaa'),
