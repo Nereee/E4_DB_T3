@@ -50,6 +50,7 @@ from Album a inner join Abestia ab using(ID_Album)
 	inner join Musikaria m using(ID_Musikaria)
 group by a.ID_Album;
 
+
 drop view if exists AlbumInfo;
 create view AlbumInfo as
 select a.ID_Album as 'ID_Album', a.Izenburua as 'Izenburua', a.Urtea as 'Urtea', count(ab.ID_Audio) as 'AbestiKop', sum(au.Iraupena) as 'Iraupena', a.Irudia as 'Irudia'
@@ -57,3 +58,9 @@ from Album a inner join Abestia ab using(ID_Album)
 	inner join Audio au using(ID_Audio)
 group by a.ID_Album;
 
+
+drop view if exists PodcastIkusi;
+create view PodcastIkusi as
+select a.ID_Audio as ID_Audio, a.Izena as Izena, a.Iraupena as Iraupena, p.ID_Podcaster as ID_Podcaster, p.Kolaboratzaileak as Kolaboratzaileak
+from Audio a inner join Podcast p using(ID_Audio)
+where a.mota = 'Podcast';
