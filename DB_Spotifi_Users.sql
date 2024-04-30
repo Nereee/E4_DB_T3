@@ -52,7 +52,6 @@ GRANT SELECT ON DB_Sprotify.Musikaria TO 'Bezeroa';
 GRANT SELECT ON DB_Sprotify.Podcast TO 'Bezeroa';
 GRANT SELECT ON DB_Sprotify.Podcaster TO 'Bezeroa';
 GRANT SELECT ON DB_Sprotify.Album TO 'Bezeroa';
-GRANT SELECT ON DB_Sprotify.Estadistikak TO 'Bezeroa';
 
 FLUSH PRIVILEGES;
 
