@@ -22,6 +22,7 @@ create table Podcaster(
 ID_Podcaster char(5),
 Izen_Artistikoa varchar(20) not null,
 Irudia longblob,
+Deskribapena varchar(1000),
 primary key(ID_Podcaster),
 unique(Izen_Artistikoa)
 );
