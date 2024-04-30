@@ -52,6 +52,6 @@ group by a.ID_Album;
 
 drop view if exists PodcastIkusi;
 create view PodcastIkusi as
-select a.ID_Audio as ID_Audio, a.Izena as Izena, a.Iraupena as Iraupena, p.ID_Podcaster as ID_Podcaster, p.Kolaboratzaileak as Kolaboratzaileak
+select a.ID_Audio as ID_Audio, a.Izena as Izena, a.Iraupena as Iraupena, p.ID_Podcaster as ID_Podcaster, p.Kolaboratzaileak as Kolaboratzaileak, a.Irudia as Irudia
 from Audio a inner join Podcast p using(ID_Audio)
 where a.mota = 'Podcast';
