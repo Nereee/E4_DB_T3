@@ -19,15 +19,6 @@ from Musikaria m inner join Album a using(ID_Musikaria)
 							inner join Erreprodukzioak e using(ID_Audio)
 group by m.Izen_Artistikoa;
 
--- Zein erabiltzaile entzun duen The Wild Project #1
-drop view if exists TWPEntzumena;
-create view TWPEntzumena as 
-select a.Izena, a.Iraupena, a.Mota, b.Erabiltzailea as 'Nortzuk entzun dute'
-from Audio a inner join Erreprodukzioak e using(ID_Audio)
-				inner join Bezeroa b using(ID_Bezeroa)
-where a.Izena = 'The Wild Proyect Podcast #1';
-
-
 drop view if exists playListView;
 create view playListView as
 select p.ID_List as 'ID_List', p.Izenburua as 'Izena', count(pa.ID_Audio) as 'Abestiak'
@@ -61,6 +52,6 @@ group by a.ID_Album;
 
 drop view if exists PodcastIkusi;
 create view PodcastIkusi as
-select a.ID_Audio as ID_Audio, a.Izena as Izena, a.Iraupena as Iraupena, p.ID_Podcaster as ID_Podcaster, p.Kolaboratzaileak as Kolaboratzaileak
+select a.ID_Audio as ID_Audio, a.Izena as Izena, a.Iraupena as Iraupena, p.ID_Podcaster as ID_Podcaster, p.Kolaboratzaileak as Kolaboratzaileak, a.Irudia as Irudia
 from Audio a inner join Podcast p using(ID_Audio)
 where a.mota = 'Podcast';
