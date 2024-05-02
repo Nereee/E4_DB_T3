@@ -81,6 +81,7 @@ Izenburua varchar(20) not null,
 Urtea date not null,
 Generoa varchar(40) not null,
 Irudia blob,
+Deskripzioa varchar(200) not null,
 ID_Musikaria char(5) not null,
 primary key(ID_Album)
 );

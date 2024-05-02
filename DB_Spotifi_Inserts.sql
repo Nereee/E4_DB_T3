@@ -82,10 +82,10 @@ VALUES
 ('AU009', 'Guest 5, Guest 6', 'PO002'),
 ('AU010', 'Guest 7, Guest 8', 'PO002');
 
-INSERT INTO Album (ID_Album, Izenburua, Urtea, Generoa, ID_Musikaria) 
+INSERT INTO Album (ID_Album, Izenburua, Urtea, Generoa, Deskripzioa,ID_Musikaria) 
 VALUES 
-('AL001', 'Album 1', '2023-01-01', 'Pop', 'MU001'),
-('AL002', 'Album 2', '2023-01-01', 'Rock', 'MU002');
+('AL001', 'Album 1', '2023-01-01', 'Pop', 'loreipsum','MU001'),
+('AL002', 'Album 2', '2023-01-01', 'Rock', 'ejgwejgj','MU002');
 
 INSERT INTO Abestia (ID_Audio, ID_Album) 
 VALUES 
@@ -161,5 +161,4 @@ VALUES
 ('AU008', '8', '9', '1', '2'),
 ('AU009', '9', '1', '2', '3'),
 ('AU010', '1', '2', '3', '4');
-
 

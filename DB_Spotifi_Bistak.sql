@@ -44,7 +44,7 @@ group by a.ID_Album;
 
 drop view if exists AlbumInfo;
 create view AlbumInfo as
-select a.ID_Album as 'ID_Album', a.Izenburua as 'Izenburua', a.Urtea as 'Urtea', count(ab.ID_Audio) as 'AbestiKop', sum(au.Iraupena) as 'Iraupena', a.Irudia as 'Irudia'
+select a.ID_Album as 'ID_Album', a.Izenburua as 'Izenburua', a.Urtea as 'Urtea', count(ab.ID_Audio) as 'AbestiKop', sum(au.Iraupena) as 'Iraupena', a.Irudia as 'Irudia', a.Deskripzioa as 'Deskribapena'
 from Album a inner join Abestia ab using(ID_Album)
 	inner join Audio au using(ID_Audio)
 group by a.ID_Album;
