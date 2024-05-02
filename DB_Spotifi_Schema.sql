@@ -11,8 +11,9 @@ use DB_Sprotify;
 create table Musikaria(
 ID_Musikaria char(5),
 Izen_Artistikoa varchar(20) not null,
-Irudia blob,
+Irudia longblob,
 Ezaugarria enum("Bakarlaria", "Taldea") not null,
+Deskribapena varchar(1000) not null default("Deskribapena"),
 primary key(ID_Musikaria),
 unique(Izen_Artistikoa)
 );
@@ -20,7 +21,8 @@ unique(Izen_Artistikoa)
 create table Podcaster(
 ID_Podcaster char(5),
 Izen_Artistikoa varchar(20) not null,
-Irudia blob,
+Irudia longblob,
+Deskribapena varchar(1000),
 primary key(ID_Podcaster),
 unique(Izen_Artistikoa)
 );
@@ -55,7 +57,7 @@ create table Audio(
 ID_Audio char(5),
 Izena varchar(150) not null,
 Iraupena int not null,
-Irudia blob,
+Irudia longblob,
 Mota enum("Podcast", "Abestia") not null,
 primary key(ID_Audio)
 );
@@ -78,6 +80,7 @@ ID_Album char(5),
 Izenburua varchar(20) not null,
 Urtea date not null,
 Generoa varchar(40) not null,
+Irudia blob,
 ID_Musikaria char(5) not null,
 primary key(ID_Album)
 );
@@ -103,15 +106,16 @@ primary key(ID_Bezeroa, ID_Audio)
 );
 
 create table Erreprodukzioak(
+ID_Erreprodukzioak int auto_increment,
 ID_Bezeroa int,
 ID_Audio char(5),
 Fecha date not null,
-primary key(ID_Bezeroa, ID_Audio, Fecha)
+primary key(ID_Erreprodukzioak)
 );
 
 create table Estadistikak(
 ID_Audio char(5),
-KeyFigure1 varchar(1),
+KeyFigure1 varchar(1), 
 KeyFigure2 varchar(1),
 KeyFigure3 varchar(1),
 KeyFigure4 varchar(1),
