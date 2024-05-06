@@ -58,6 +58,7 @@ ID_Audio char(5),
 Izena varchar(150) not null,
 Iraupena int not null,
 Irudia longblob,
+Deskribapena varchar(1000) not null,
 Mota enum("Podcast", "Abestia") not null,
 primary key(ID_Audio)
 );
