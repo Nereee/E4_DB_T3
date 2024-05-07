@@ -117,10 +117,30 @@ primary key(ID_Erreprodukzioak)
 
 create table Estadistikak(
 ID_Audio char(5),
-KeyFigure1 varchar(1), 
-KeyFigure2 varchar(1),
-KeyFigure3 varchar(1),
-KeyFigure4 varchar(1),
+Erreprodukzio_Kop_Egunero long, 
+Erreprodukzio_Kop_Hilabetero long,
+Erreprodukzio_Kop_Urtero long,
+primary key(ID_Audio)
+);
+
+create table Erreprodukzio_Eguna(
+ID_Audio char(5),
+Eguna date not null, 
+Erreprodukzio_Kop long not null,
+primary key(ID_Audio)
+);
+
+create table Erreprodukzio_Hilabete(
+ID_Audio char(5),
+Hilabetea enum("urtarrila", "otsaila", "martxoa", "apirila", "maiatza", "ekaina", "uztaila", "abuztua", "iraila", "urria", "azaroa", "abendua") not null, 
+Erreprodukzio_Kop long not null,
+primary key(ID_Audio)
+);
+
+create table Erreprodukzio_Urtea(
+ID_Audio char(5),
+Urtea year not null, 
+Erreprodukzio_Kop long not null,
 primary key(ID_Audio)
 );
 
@@ -184,4 +204,19 @@ constraint FK_ErreprodukzioakAudio foreign key (ID_Audio) references Audio (ID_A
 
 alter table Estadistikak
 add
-constraint FK_EstadistikakAudio foreign key (ID_Audio) references Audio (ID_Audio) on update cascade on delete cascade;
+constraint FK_EstadistikakAudio foreign key (ID_Audio) references Audio (ID_Audio) on update cascade;
+
+
+alter table Erreprodukzio_Eguna
+add
+constraint FK_EstadistikakEguna foreign key (ID_Audio) references Estadistikak (ID_Audio) on update cascade;
+
+
+alter table Erreprodukzio_Hilabete
+add
+constraint FK_EstadistikakHilabete foreign key (ID_Audio) references Estadistikak (ID_Audio) on update cascade;
+
+
+alter table Erreprodukzio_Urtea
+add
+constraint FK_EstadistikakUrtea foreign key (ID_Audio) references Estadistikak (ID_Audio) on update cascade;
