@@ -160,4 +160,6 @@ VALUES
 ('5', 'AU010', '2023-01-10');
 
 
-
+INSERT INTO Erreprodukzio_Eguna (ID_Audio, Eguna, Erreprodukzio_Kop) 
+VALUES 
+('AU003', '2024-05-07', 0);

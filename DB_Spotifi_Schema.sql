@@ -204,19 +204,13 @@ constraint FK_ErreprodukzioakAudio foreign key (ID_Audio) references Audio (ID_A
 
 alter table Estadistikak
 add
-constraint FK_EstadistikakAudio foreign key (ID_Audio) references Audio (ID_Audio) on update cascade;
-
-
-alter table Erreprodukzio_Eguna
+constraint FK_EstadistikakAudio foreign key (ID_Audio) references Audio (ID_Audio) on update cascade,
 add
-constraint FK_EstadistikakEguna foreign key (ID_Audio) references Estadistikak (ID_Audio) on update cascade;
-
-
-alter table Erreprodukzio_Hilabete
+constraint FK_EstadistikakEguna foreign key (ID_Audio) references Erreprodukzio_Eguna (ID_Audio) on update cascade,
 add
-constraint FK_EstadistikakHilabete foreign key (ID_Audio) references Estadistikak (ID_Audio) on update cascade;
-
-
-alter table Erreprodukzio_Urtea
+constraint FK_EstadistikakHilabete foreign key (ID_Audio) references Erreprodukzio_Hilabete (ID_Audio) on update cascade,
 add
-constraint FK_EstadistikakUrtea foreign key (ID_Audio) references Estadistikak (ID_Audio) on update cascade;
+constraint FK_EstadistikakUrtea foreign key (ID_Audio) references Erreprodukzio_Urtea (ID_Audio) on update cascade;
+
+
+
