@@ -21,8 +21,8 @@ group by m.Izen_Artistikoa;
 
 drop view if exists playListView;
 create view playListView as
-select p.ID_List as 'ID_List', p.Izenburua as 'Izena', count(pa.ID_Audio) as 'Abestiak'
-from Playlist p inner join Playlist_Abestiak pa using(ID_List)
+select p.ID_List as 'ID_List', p.Izenburua as 'Izena', count(pa.ID_Audio) as 'Abestiak', p.ID_Bezeroa as 'ID_Bezeroa'
+from Playlist p left join Playlist_Abestiak pa using(ID_List)
 group by p.ID_List;
 
 -- Podcasterren podcastak zenbat erreprodukzio daukaten ikusteko.
