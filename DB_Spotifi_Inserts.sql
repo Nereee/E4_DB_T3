@@ -162,4 +162,7 @@ VALUES
 
 INSERT INTO Erreprodukzio_Eguna (ID_Audio, Eguna, Erreprodukzio_Kop) 
 VALUES 
-('AU003', '2024-05-07', 0);
+('AU003', '2024-05-07', 0),
+('AU004', '2024-05-07', 0),
+('AU007', '2024-05-07', 0),
+('AU008', '2024-05-07', 0);

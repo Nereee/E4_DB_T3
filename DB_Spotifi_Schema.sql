@@ -127,21 +127,21 @@ create table Erreprodukzio_Eguna(
 ID_Audio char(5),
 Eguna date not null, 
 Erreprodukzio_Kop long not null,
-primary key(ID_Audio)
+primary key(ID_Audio, Eguna)
 );
 
 create table Erreprodukzio_Hilabete(
 ID_Audio char(5),
-Hilabetea enum("urtarrila", "otsaila", "martxoa", "apirila", "maiatza", "ekaina", "uztaila", "abuztua", "iraila", "urria", "azaroa", "abendua") not null, 
+Hilabetea varchar(20) not null, 
 Erreprodukzio_Kop long not null,
-primary key(ID_Audio)
+primary key(ID_Audio, Hilabetea)
 );
 
 create table Erreprodukzio_Urtea(
 ID_Audio char(5),
 Urtea year not null, 
 Erreprodukzio_Kop long not null,
-primary key(ID_Audio)
+primary key(ID_Audio, Urtea)
 );
 
 
