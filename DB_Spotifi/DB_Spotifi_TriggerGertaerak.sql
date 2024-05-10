@@ -90,7 +90,7 @@ STARTS '2025-01-01 00:00:00'
 DO
 BEGIN
     INSERT INTO Erreprodukzio_Urtea (ID_Audio, Urtea, Erreprodukzio_Kop)
-    SELECT ID_Audio, YEAR(CURRENT_DATE()) -1, SUM(Erreprodukzio_Kop) AS Total_Reproducciones 
+    SELECT ID_Audio, YEAR(CURRENT_DATE()) -1, SUM(Erreprodukzio_Kop)
     FROM Erreprodukzio_Eguna
     WHERE YEAR(Eguna) = YEAR(CURRENT_DATE()) - 1
     GROUP BY ID_Audio;
