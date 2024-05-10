@@ -60,46 +60,25 @@ begin
 end
 //
 
-select * from information_schema.events;
-
-show processlist;
-
-SET GLOBAL event_scheduler = ON;
-
-show warnings;
-
 DELIMITER //
-drop event if exists avgHilabetero//
-CREATE EVENT avgHilabetero
-ON SCHEDULE EVERY 1 MONTH 
+DROP EVENT IF EXISTS updateMonthlyReproductions//
+CREATE EVENT updateMonthlyReproductions
+ON SCHEDULE EVERY 1 MONTH
 STARTS '2024-06-01 00:00:00' 
 DO
 BEGIN
-    DECLARE abestiKop INT;
-    DECLARE bukle INT;
-    
-    SET abestiKop = (SELECT COUNT(ID_Audio) FROM Audio WHERE mota = 'abestia');
-    SET bukle = 0;
-    
-    WHILE abestiKop > bukle DO
-        INSERT INTO Erreprodukzio_Hilabete (ID_Audio, Hilabetea, Erreprodukzio_Kop)
-        VALUES (
-            (SELECT ID_Audio FROM Audio WHERE mota = 'abestia' LIMIT 1 OFFSET bukle),
-            
-            (SELECT MONTHNAME(Eguna) FROM Erreprodukzio_Eguna WHERE ID_Audio = 
-                (SELECT ID_Audio FROM Audio WHERE mota = 'abestia' LIMIT 1 OFFSET bukle) 
-             ORDER BY Eguna DESC LIMIT 1),
-             
-            (SELECT ID_Audio, MONTHNAME(Eguna), SUM(Erreprodukzio_Kop) FROM Erreprodukzio_Eguna WHERE ID_Audio = 
-                (SELECT ID_Audio FROM Audio WHERE mota = 'abestia' LIMIT 1 OFFSET bukle) 
-             AND MONTHNAME(Eguna) = 
-                (SELECT MONTHNAME(Eguna) FROM Erreprodukzio_Eguna 
-                 WHERE ID_Audio = (SELECT ID_Audio FROM Audio WHERE mota = 'abestia' LIMIT 1 OFFSET bukle)
-                 ORDER BY Eguna DESC LIMIT 1))
-        );
-        SET bukle = bukle + 1;
-    END WHILE;
-    
+    DECLARE last_month_start DATE;
+    DECLARE last_month_end DATE;
+
+    SET last_month_start = DATE_SUB(LAST_DAY(CURRENT_DATE - INTERVAL 1 MONTH), INTERVAL DAY(LAST_DAY(CURRENT_DATE - INTERVAL 1 MONTH)) - 1 DAY);
+    SET last_month_end = LAST_DAY(CURRENT_DATE - INTERVAL 1 MONTH);
+
+    INSERT INTO Erreprodukzio_Hilabete (ID_Audio, Hilabetea, Erreprodukzio_Kop)
+    SELECT ID_Audio, last_month_start, SUM(Erreprodukzio_Kop)
+    FROM Erreprodukzio_Eguna
+    WHERE Eguna BETWEEN last_month_start AND last_month_end
+    GROUP BY ID_Audio
+    ON DUPLICATE KEY UPDATE Erreprodukzio_Kop = VALUES(Erreprodukzio_Kop);
 END 
 //
 
