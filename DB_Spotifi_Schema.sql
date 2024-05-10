@@ -132,7 +132,7 @@ primary key(ID_Audio, Eguna)
 
 create table Erreprodukzio_Hilabete(
 ID_Audio char(5),
-Hilabetea varchar(20) not null, 
+Hilabetea date not null, 
 Erreprodukzio_Kop long not null,
 primary key(ID_Audio, Hilabetea)
 );

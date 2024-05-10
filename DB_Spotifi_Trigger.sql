@@ -1,31 +1,31 @@
 use DB_Sprotify;
 
-/*--------------Funtzioak--------------*/
+/*--------------Funtzioa/Prozedurak--------------*/
 DELIMITER //
-drop function if exists hilabeteTraduktor;
-CREATE FUNCTION hilabeteTraduktor(fecha DATE) RETURNS VARCHAR(20)
-READS SQL DATA
+drop procedure if exists instertNewEguna;
+CREATE procedure instertNewEguna(abestiKop INT)
 BEGIN
-    DECLARE hilabetea VARCHAR(20);
+    DECLARE bukle INT;
+    SET bukle = 0;
     
-    IF MONTHNAME(fecha) = 'January' THEN SET hilabetea = 'urtarrila';
-    ELSEIF MONTHNAME(fecha) = 'February' THEN SET hilabetea = 'otsaila';
-    ELSEIF MONTHNAME(fecha) = 'March' THEN SET hilabetea = 'martxoa';
-    ELSEIF MONTHNAME(fecha) = 'April' THEN SET hilabetea = 'apirila';
-    ELSEIF MONTHNAME(fecha) like 'May' THEN SET hilabetea = 'maiatza';
-    ELSEIF MONTHNAME(fecha) = 'June' THEN SET hilabetea = 'ekaina';
-    ELSEIF MONTHNAME(fecha) = 'July' THEN SET hilabetea = 'uztaila';
-    ELSEIF MONTHNAME(fecha) = 'August' THEN SET hilabetea = 'abuztua';
-    ELSEIF MONTHNAME(fecha) = 'September' THEN SET hilabetea = 'iraila';
-    ELSEIF MONTHNAME(fecha) = 'October' THEN SET hilabetea = 'urria';
-    ELSEIF MONTHNAME(fecha) = 'November' THEN SET hilabetea = 'azaroa';
-    ELSE SET hilabetea = 'abendua';
-    END IF;
-    
-    RETURN hilabetea;
+    WHILE abestiKop > bukle DO
+		INSERT INTO Erreprodukzio_Eguna (ID_Audio, Eguna, Erreprodukzio_Kop) 
+		VALUES 
+		((SELECT ID_Audio FROM Audio WHERE mota = 'abestia' LIMIT 1 OFFSET bukle), '2024-05-06', 0);
+		SET bukle = bukle + 1;
+    END WHILE;
 END;
 //
 
+DELIMITER //
+drop procedure if exists instertNewEgunaCaller//
+CREATE procedure instertNewEgunaCaller()
+BEGIN
+    declare abestiKop bigint default 0;
+    set abestiKop = (SELECT COUNT(ID_Audio) FROM Audio WHERE mota = 'abestia');
+    call instertNewEguna(abestiKop);
+END;
+//
 
 
 /*--------------Trigerrak--------------*/
@@ -52,7 +52,7 @@ BEGIN
     IF NEW.Mota = 'Premium' THEN
         INSERT INTO Premium (ID_Bezeroa, Iraungitze_data)
         VALUES 
-			(NEW.ID_Bezeroa, DATE_ADD(CURDATE(), INTERVAL 1 YEAR));
+			(NEW.ID_Bezeroa, DATE_ADD(current_date(), INTERVAL 1 YEAR));
     END IF;
 END 
 //
@@ -67,7 +67,7 @@ BEGIN
         INSERT INTO Premium (ID_Bezeroa, Iraungitze_data)
         VALUES (
             NEW.ID_Bezeroa,
-            DATE_ADD(CURDATE(), INTERVAL 1 YEAR)
+            DATE_ADD(current_date(), INTERVAL 1 YEAR)
         );
     END IF;
 END 
@@ -79,17 +79,22 @@ END
 SHOW events;
 
 DELIMITER //
-drop event if exists newRowsData;
+drop event if exists newRowsData//
 create event if not exists newRowsData
 ON SCHEDULE EVERY 1 DAY 
-STARTS '2024-05-09 09:30:00' DO
-INSERT INTO Erreprodukzio_Eguna (ID_Audio, Eguna, Erreprodukzio_Kop) 
-VALUES 
-('AU003', current_date(), 0),
-('AU004', current_date(), 0),
-('AU007', current_date(), 0),
-('AU008', current_date(), 0);
+STARTS '2024-05-10 10:00:00' DO
+begin
+	call instertNewEgunaCaller();
+end
 //
+
+select * from information_schema.events;
+
+show processlist;
+
+SET GLOBAL event_scheduler = ON;
+
+show warnings;
 
 DELIMITER //
 drop event if exists avgHilabetero;
@@ -113,7 +118,7 @@ BEGIN
                 (SELECT ID_Audio FROM Audio WHERE mota = 'abestia' LIMIT 1 OFFSET bukle) 
              ORDER BY Eguna DESC LIMIT 1),
              
-            (SELECT SUM(Erreprodukzio_Kop) FROM Erreprodukzio_Eguna WHERE ID_Audio = 
+            (SELECT ID_Audio, MONTHNAME(Eguna), SUM(Erreprodukzio_Kop) FROM Erreprodukzio_Eguna WHERE ID_Audio = 
                 (SELECT ID_Audio FROM Audio WHERE mota = 'abestia' LIMIT 1 OFFSET bukle) 
              AND MONTHNAME(Eguna) = 
                 (SELECT MONTHNAME(Eguna) FROM Erreprodukzio_Eguna 
@@ -134,9 +139,9 @@ STARTS '2025-01-01 00:00:00'
 DO
 BEGIN
     INSERT INTO Erreprodukzio_Urtea (ID_Audio, Urtea, Erreprodukzio_Kop)
-    SELECT ID_Audio, YEAR(CURDATE()) -1, SUM(Erreprodukzio_Kop) AS Total_Reproducciones 
+    SELECT ID_Audio, YEAR(CURRENT_DATE()) -1, SUM(Erreprodukzio_Kop) AS Total_Reproducciones 
     FROM Erreprodukzio_Eguna
-    WHERE YEAR(Eguna) = YEAR(CURDATE()) - 1
+    WHERE YEAR(Eguna) = YEAR(CURRENT_DATE()) - 1
     GROUP BY ID_Audio;
 END 
 //
