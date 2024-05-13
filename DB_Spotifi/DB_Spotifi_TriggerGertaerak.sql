@@ -54,7 +54,7 @@ DELIMITER //
 drop event if exists newRowsData//
 create event if not exists newRowsData
 ON SCHEDULE EVERY 1 DAY 
-STARTS '2024-05-10 10:00:00' DO
+STARTS '2024-05-14 09:15:00' DO
 begin
 	call instertNewEgunaCaller();
 end
@@ -96,5 +96,29 @@ BEGIN
     GROUP BY ID_Audio;
 END 
 //
+
+DELIMITER //
+DROP EVENT IF EXISTS avgEstaditikak//
+CREATE EVENT avgEstaditikak
+ON SCHEDULE EVERY 1 DAY 
+STARTS '2024-05-14 09:10:00' 
+DO
+BEGIN
+    DECLARE current_month INT;
+    DECLARE current_year INT;
+
+    SET current_month = MONTH(CURRENT_TIMESTAMP);
+    SET current_year = YEAR(CURRENT_TIMESTAMP);
+
+    IF DAY(CURRENT_TIMESTAMP) = 1 THEN
+        CALL insertEstadistikak(2); -- Nuevo año, pasa 2
+    ELSEIF current_month != (SELECT MONTH(MAX(Eguna)) FROM Erreprodukzio_Eguna) THEN
+        CALL insertEstadistikak(1); -- Nuevo mes, pasa 1
+    ELSE
+        CALL insertEstadistikak(0); -- Día normal, pasa 0
+    END IF;
+END 
+//
+
 
 

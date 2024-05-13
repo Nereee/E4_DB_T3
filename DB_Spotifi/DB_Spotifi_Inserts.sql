@@ -107,24 +107,24 @@ VALUES
 
 INSERT INTO Playlist (ID_List, Izenburua, Sorrera_data, ID_Bezeroa) 
 VALUES 
-('PL001', 'Playlist 1', '2023-01-01', '1'),
-('PL002', 'Playlist 2', '2023-01-02', '2'),
-('PL003', 'Playlist 3', '2023-01-03', '3'),
-('PL004', 'Playlist 4', '2023-01-04', '4'),
-('PL005', 'Playlist 5', '2023-01-05', '5'),
-('PL006', 'Playlist 6', '2023-01-06', '6'),
-('PL007', 'Playlist 7', '2023-01-07', '7'),
-('PL008', 'Playlist 8', '2023-01-08', '8'),
-('PL009', 'Playlist 9', '2023-01-09', '9'),
-('PL010', 'Playlist 10', '2023-01-10', '10');
+('PL1', 'Playlist 1', '2023-01-01', '1'),
+('PL2', 'Playlist 2', '2023-01-02', '2'),
+('PL3', 'Playlist 3', '2023-01-03', '3'),
+('PL4', 'Playlist 4', '2023-01-04', '4'),
+('PL5', 'Playlist 5', '2023-01-05', '5'),
+('PL6', 'Playlist 6', '2023-01-06', '6'),
+('PL7', 'Playlist 7', '2023-01-07', '7'),
+('PL8', 'Playlist 8', '2023-01-08', '8'),
+('PL9', 'Playlist 9', '2023-01-09', '9'),
+('PL10', 'Playlist 10', '2023-01-10', '10');
 
 
 INSERT INTO Playlist_Abestiak (ID_Audio, ID_List)
 VALUES
-('AU003', 'PL003'),
-('AU004', 'PL004'),
-('AU007', 'PL004'),
-('AU008', 'PL008');
+('AU003', 'PL3'),
+('AU004', 'PL4'),
+('AU007', 'PL4'),
+('AU008', 'PL8');
 
 
 INSERT INTO Premium (ID_Bezeroa, Iraungitze_data) 
@@ -134,16 +134,10 @@ VALUES
 
 INSERT INTO Gustokoak (ID_Bezeroa, ID_Audio) 
 VALUES 
-('1', 'AU001'),
-('1', 'AU002'),
 ('2', 'AU003'),
 ('2', 'AU004'),
-('3', 'AU005'),
-('3', 'AU006'),
 ('4', 'AU007'),
-('4', 'AU008'),
-('5', 'AU009'),
-('5', 'AU010');
+('4', 'AU008');
 
 -- Sample data for Erreprodukzioak table
 INSERT INTO Erreprodukzioak (ID_Bezeroa, ID_Audio, Fecha) 
@@ -159,10 +153,37 @@ VALUES
 ('5', 'AU009', '2023-01-09'),
 ('5', 'AU010', '2023-01-10');
 
-
 INSERT INTO Erreprodukzio_Eguna (ID_Audio, Eguna, Erreprodukzio_Kop) 
 VALUES 
-('AU003', '2024-05-07', 0),
-('AU004', '2024-05-07', 0),
-('AU007', '2024-05-07', 0),
-('AU008', '2024-05-07', 0);
+('AU003', '2024-05-07', 10),
+('AU004', '2024-05-07', 5),
+('AU007', '2024-05-07', 9),
+('AU008', '2024-05-07', 5),
+
+('AU003', '2024-05-08', 10),
+('AU004', '2024-05-08', 8),
+('AU007', '2024-05-08', 1),
+('AU008', '2024-05-08', 12),
+
+('AU003', '2024-05-09', 14),
+('AU004', '2024-05-09', 2),
+('AU007', '2024-05-09', 15),
+('AU008', '2024-05-09', 13);
+
+INSERT INTO Erreprodukzio_Hilabete (ID_Audio, Hilabetea, Erreprodukzio_Kop) 
+VALUES 
+('AU003', '2024-04-01', 13),
+('AU004', '2024-04-01', 36),
+('AU007', '2024-04-01', 17),
+('AU008', '2024-04-01', 40),
+('AU003', '2024-05-01', 34),
+('AU004', '2024-05-01', 30),
+('AU007', '2024-05-01', 25),
+('AU008', '2024-05-01', 30);
+
+INSERT INTO Erreprodukzio_Urtea (ID_Audio, Urtea, Erreprodukzio_Kop) 
+VALUES 
+('AU003', '2024', 10),
+('AU004', '2024', 5),
+('AU007', '2024', 9),
+('AU008', '2024', 5);
