@@ -38,8 +38,8 @@ GROUP BY p.Izen_artistikoa;
 DROP VIEW IF EXISTS AlbumView;
 CREATE VIEW AlbumView AS
 SELECT a.ID_Album AS 'ID_Album', a.Izenburua AS 'Izenburua', COUNT(ab.ID_Audio) AS 'Abestiak', m.ID_Musikaria
-FROM Album a INNER JOIN Abestia ab USING(ID_Album)
-		INNER JOIN Musikaria m USING(ID_Musikaria)
+FROM Album a LEFT JOIN Abestia ab USING(ID_Album)
+		LEFT JOIN Musikaria m USING(ID_Musikaria)
 GROUP BY a.ID_Album;
 
 -- Albumen informazio osatua lortzeko.
