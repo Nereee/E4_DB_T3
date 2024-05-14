@@ -3,55 +3,56 @@ use DB_Sprotify;
 -- Bistak
 
 -- Erabiltzaile konkretu baten Playlistak ikusteko.
-drop view if exists ikusiPlayListak;
-create view ikusiPlayListak as 
-select p.Izenburua, p.Sorrera_data, b.Erabiltzailea as 'Sortzailea'
-from Playlist p inner join Bezeroa b using(ID_Bezeroa)
-where b.Erabiltzailea = 'sophia_fernandez';
+DROP VIEW IF EXISTS ikusiPlayListak;
+CREATE VIEW ikusiPlayListak AS 
+SELECT p.Izenburua, p.Sorrera_data, b.Erabiltzailea AS 'Sortzailea'
+FROM Playlist p INNER JOIN Bezeroa b USING(ID_Bezeroa)
+WHERE b.Erabiltzailea = 'sophia_fernandez';
 
 -- Musikarien abestiak zenbat erreprodukzio daukaten ikusteko.
-drop view if exists musikaDeskubritu;
-create view musikaDeskubritu as 
-select m.Izen_Artistikoa as 'Musikaria', count(e.ID_Audio) as 'Erreprodukzioak'
-from Musikaria m inner join Album a using(ID_Musikaria)
-					inner join Abestia ab using(ID_Album)
-						inner join Audio au using(ID_Audio)
-							inner join Erreprodukzioak e using(ID_Audio)
-group by m.Izen_Artistikoa;
+DROP VIEW IF EXISTS musikaDeskubritu;
+CREATE VIEW musikaDeskubritu AS 
+SELECT m.Izen_Artistikoa AS 'Musikaria', COUNT(e.ID_Audio) AS 'Erreprodukzioak'
+FROM Musikaria m INNER JOIN Album a USING(ID_Musikaria)
+					INNER JOIN Abestia ab USING(ID_Album)
+						INNER JOIN Audio au USING(ID_Audio)
+							INNER JOIN Erreprodukzioak e USING(ID_Audio)
+GROUP BY m.Izen_Artistikoa;
 
-drop view if exists playListView;
-create view playListView as
-select p.ID_List as 'ID_List', p.Izenburua as 'Izena', count(pa.ID_Audio) as 'Abestiak', p.ID_Bezeroa as 'ID_Bezeroa'
-from Playlist p left join Playlist_Abestiak pa using(ID_List)
-group by p.ID_List;
+-- Playlist-en informazioa lortzeko.
+DROP VIEW IF EXISTS playListView;
+CREATE VIEW playListView AS
+SELECT p.ID_List AS 'ID_List', p.Izenburua AS 'Izena', COUNT(pa.ID_Audio) AS 'Abestiak', p.ID_Bezeroa AS 'ID_Bezeroa'
+FROM Playlist p LEFT JOIN Playlist_Abestiak pa USING(ID_List)
+GROUP BY p.ID_List;
 
--- Podcasterren podcastak zenbat erreprodukzio daukaten ikusteko.
-drop view if exists podcastDeskubritu;
-create view podcastDeskubritu as 
-select p.Izen_artistikoa as 'Podcasterra', count(e.ID_Audio) as 'Erreprodukzioak'
-from Podcaster p inner join Podcast po using(ID_Podcaster)
-					inner join Erreprodukzioak e using(ID_Audio)
-group by p.Izen_artistikoa;
+-- Podcasterren podcasten erreprodukzio kopurua ikusteko.
+DROP VIEW IF EXISTS podcastDeskubritu;
+CREATE VIEW podcastDeskubritu AS 
+SELECT p.Izen_artistikoa AS 'Podcasterra', COUNT(e.ID_Audio) AS 'Erreprodukzioak'
+FROM Podcaster p INNER JOIN Podcast po USING(ID_Podcaster)
+					INNER JOIN Erreprodukzioak e USING(ID_Audio)
+GROUP BY p.Izen_artistikoa;
 
+-- Albumen informazioa lortzeko.
+DROP VIEW IF EXISTS AlbumView;
+CREATE VIEW AlbumView AS
+SELECT a.ID_Album AS 'ID_Album', a.Izenburua AS 'Izenburua', COUNT(ab.ID_Audio) AS 'Abestiak', m.ID_Musikaria
+FROM Album a INNER JOIN Abestia ab USING(ID_Album)
+		INNER JOIN Musikaria m USING(ID_Musikaria)
+GROUP BY a.ID_Album;
 
-drop view if exists AlbumView;
-create view AlbumView as
-select a.ID_Album as 'ID_Album', a.Izenburua as 'Izenburua', count(ab.ID_Audio) as 'Abestiak', m.ID_Musikaria
-from Album a inner join Abestia ab using(ID_Album)
-	inner join Musikaria m using(ID_Musikaria)
-group by a.ID_Album;
+-- Albumen informazio osatua lortzeko.
+DROP VIEW IF EXISTS AlbumInfo;
+CREATE VIEW AlbumInfo AS
+SELECT a.ID_Album AS 'ID_Album', a.Izenburua AS 'Izenburua', a.Urtea AS 'Urtea', COUNT(ab.ID_Audio) AS 'AbestiKop', SUM(au.Iraupena) AS 'Iraupena', a.Irudia AS 'Irudia', a.Deskripzioa AS 'Deskribapena'
+FROM Album a INNER JOIN Abestia ab USING(ID_Album)
+		INNER JOIN Audio au USING(ID_Audio)
+GROUP BY a.ID_Album;
 
-
-drop view if exists AlbumInfo;
-create view AlbumInfo as
-select a.ID_Album as 'ID_Album', a.Izenburua as 'Izenburua', a.Urtea as 'Urtea', count(ab.ID_Audio) as 'AbestiKop', sum(au.Iraupena) as 'Iraupena', a.Irudia as 'Irudia', a.Deskripzioa as 'Deskribapena'
-from Album a inner join Abestia ab using(ID_Album)
-	inner join Audio au using(ID_Audio)
-group by a.ID_Album;
-
-
-drop view if exists PodcastIkusi;
-create view PodcastIkusi as
-select a.ID_Audio as ID_Audio, a.Izena as Izena, a.Iraupena as Iraupena, p.ID_Podcaster as ID_Podcaster, p.Kolaboratzaileak as Kolaboratzaileak, a.Irudia as Irudia
-from Audio a inner join Podcast p using(ID_Audio)
-where a.mota = 'Podcast';
+-- Podcastak ikusteko.
+DROP VIEW IF EXISTS PodcastIkusi;
+CREATE VIEW PodcastIkusi AS
+SELECT a.ID_Audio AS ID_Audio, a.Izena AS Izena, a.Iraupena AS Iraupena, p.ID_Podcaster AS ID_Podcaster, p.Kolaboratzaileak AS Kolaboratzaileak, a.Irudia AS Irudia
+FROM Audio a INNER JOIN Podcast p USING(ID_Audio)
+WHERE a.mota = 'Podcast';

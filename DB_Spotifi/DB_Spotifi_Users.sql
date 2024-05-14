@@ -1,26 +1,34 @@
 USE DB_Sprotify;
 
 -- Rolak
-drop role if exists 'Administratzailea';
-CREATE ROLE if not exists 'Administratzailea';
+-- Administratzaile rolaren sortzea edo berria ezartzea
+DROP ROLE IF EXISTS 'Administratzailea';
+CREATE ROLE IF NOT EXISTS 'Administratzailea';
 
-drop role if exists 'Analista';
-CREATE ROLE if not exists 'Analista';
+-- Analista rolaren sortzea edo berria ezartzea
+DROP ROLE IF EXISTS 'Analista';
+CREATE ROLE IF NOT EXISTS 'Analista';
 
-drop role if exists 'Departamentu_burua';
-CREATE ROLE if not exists 'Departamentu_burua';
+-- Departamentu buruaren rolaren sortzea edo berria ezartzea
+DROP ROLE IF EXISTS 'Departamentu_burua';
+CREATE ROLE IF NOT EXISTS 'Departamentu_burua';
 
-drop role if exists 'Langilea';
-CREATE ROLE if not exists 'Langilea';
+-- Langilearen rolaren sortzea edo berria ezartzea
+DROP ROLE IF EXISTS 'Langilea';
+CREATE ROLE IF NOT EXISTS 'Langilea';
 
-drop role if exists 'Bezeroa';
-CREATE ROLE if not exists 'Bezeroa';
+-- Bezeroaren rolaren sortzea edo berria ezartzea
+DROP ROLE IF EXISTS 'Bezeroa';
+CREATE ROLE IF NOT EXISTS 'Bezeroa';
 
 -- Rolei pribilegioak
+-- Administratzaileari DB_Sprotify zerbitzariaren guztiak ematea
 GRANT ALL PRIVILEGES ON DB_Sprotify.* TO 'Administratzailea';
 
+-- Analistari DB_Sprotify zerbitzariaren hautatuak ematea
 GRANT SELECT ON DB_Sprotify.* TO 'Analista';
 
+-- Departamentu buruari DB_Sprotify zerbitzariaren taulak hautatuak ematea
 GRANT SELECT ON DB_Sprotify.Hizkuntza TO 'Departamentu_burua';
 GRANT SELECT ON DB_Sprotify.Musikaria TO 'Departamentu_burua';
 GRANT SELECT ON DB_Sprotify.Podcaster TO 'Departamentu_burua';
@@ -29,6 +37,7 @@ GRANT SELECT ON DB_Sprotify.Abestia TO 'Departamentu_burua';
 GRANT SELECT ON DB_Sprotify.Album TO 'Departamentu_burua';
 GRANT SELECT ON DB_Sprotify.Podcast TO 'Departamentu_burua';
 
+-- Langileari DB_Sprotify zerbitzariaren taulak sortzea, gehitzea eta eguneratzea ematea
 GRANT INSERT, SELECT, UPDATE ON DB_Sprotify.Hizkuntza TO 'Langilea';
 GRANT INSERT, SELECT, UPDATE ON DB_Sprotify.Musikaria TO 'Langilea';
 GRANT INSERT, SELECT, UPDATE ON DB_Sprotify.Podcaster TO 'Langilea';
@@ -37,6 +46,7 @@ GRANT INSERT, SELECT, UPDATE ON DB_Sprotify.Abestia TO 'Langilea';
 GRANT INSERT, SELECT, UPDATE ON DB_Sprotify.Album TO 'Langilea';
 GRANT INSERT, SELECT, UPDATE ON DB_Sprotify.Podcast TO 'Langilea';
 
+-- Bezeroari DB_Sprotify zerbitzariaren taulak sortzea, gehitzea eta ezabatzea ematea
 GRANT INSERT, SELECT, UPDATE ON DB_Sprotify.Bezeroa TO 'Bezeroa';
 GRANT INSERT, SELECT, DELETE ON DB_Sprotify.Playlist TO 'Bezeroa';
 GRANT INSERT, SELECT ON DB_Sprotify.Premium TO 'Bezeroa';
@@ -55,60 +65,81 @@ GRANT SELECT ON DB_Sprotify.Album TO 'Bezeroa';
 
 FLUSH PRIVILEGES;
 
-
-
--- Users
-drop USER if exists 'Admin'@'%';
-CREATE USER if not exists 'Admin'@'%' IDENTIFIED BY 'Admin12345.';
+-- Erabiltzaileak
+-- Admin erabiltzailea sortzea edo berria ezartzea
+DROP USER IF EXISTS 'Admin'@'%';
+CREATE USER IF NOT EXISTS 'Admin'@'%' IDENTIFIED BY 'Admin12345.';
 GRANT 'Administratzailea' TO 'Admin'@'%';
 
-drop USER if exists 'a'@'%';
-CREATE USER if not exists 'a'@'%' IDENTIFIED BY 'a';
+-- a erabiltzailea sortzea edo berria ezartzea
+DROP USER IF EXISTS 'a'@'%';
+CREATE USER IF NOT EXISTS 'a'@'%' IDENTIFIED BY 'a';
 GRANT 'Administratzailea' TO 'a'@'%';
 
-drop USER if exists 'Departamentua'@'%';
-CREATE USER if not exists 'Departamentua'@'%' IDENTIFIED BY 'Depart12345.';
+-- Departamentua erabiltzailea sortzea edo berria ezartzea
+DROP USER IF EXISTS 'Departamentua'@'%';
+CREATE USER IF NOT EXISTS 'Departamentua'@'%' IDENTIFIED BY 'Depart12345.';
 GRANT 'Departamentu_burua' TO 'Departamentua'@'%';
 
-drop USER if exists 'Analist1'@'%';
-CREATE USER if not exists 'Analist1'@'%' IDENTIFIED BY 'Analist12345.';
+-- Analist1 erabiltzailea sortzea edo berria ezartzea
+DROP USER IF EXISTS 'Analist1'@'%';
+CREATE USER IF NOT EXISTS 'Analist1'@'%' IDENTIFIED BY 'Analist12345.';
 GRANT 'Analista' TO 'Analist1'@'%';
 
-drop USER if exists 'Analist2'@'%';
-CREATE USER if not exists 'Analist2'@'%' IDENTIFIED BY 'Analist12345.';
+-- Analist2 erabiltzailea sortzea edo berria ezartzea
+DROP USER IF EXISTS 'Analist2'@'%';
+CREATE USER IF NOT EXISTS 'Analist2'@'%' IDENTIFIED BY 'Analist12345.';
 GRANT 'Analista' TO 'Analist2'@'%';
 
-drop USER if exists 'Langile'@'%';
-CREATE USER if not exists 'Langile'@'%' IDENTIFIED BY 'Lang12345.';
+-- Langile erabiltzailea sortzea edo berria ezartzea
+DROP USER IF EXISTS 'Langile'@'%';
+CREATE USER IF NOT EXISTS 'Langile'@'%' IDENTIFIED BY 'Lang12345.';
 GRANT 'Langilea' TO 'Langile'@'%';
 
-drop USER if exists 'Bezero'@'%';
-CREATE USER if not exists 'Bezero'@'%' IDENTIFIED BY 'Bez12345.';
+-- Bezero erabiltzailea sortzea edo berria ezartzea
+DROP USER IF EXISTS 'Bezero'@'%';
+CREATE USER IF NOT EXISTS 'Bezero'@'%' IDENTIFIED BY 'Bez12345.';
 GRANT 'Bezeroa' TO 'Bezero'@'%';
 
-drop USER if exists 'unai.souto'@'%';
-CREATE USER if not exists 'unai.souto'@'%' IDENTIFIED BY 'Bez12345.';
-GRANT 'Bezeroa' TO 'Bezero'@'%';
-drop USER if exists 'iker.sanchez'@'%';
-CREATE USER if not exists 'iker.sanchez'@'%' IDENTIFIED BY 'Bez12345.';
-GRANT 'Bezeroa' TO 'Bezero'@'%';
-drop USER if exists 'juan.perez'@'%';
-CREATE USER if not exists 'juan.perez'@'%' IDENTIFIED BY 'Bez12345.';
-GRANT 'Bezeroa' TO 'Bezero'@'%';
-drop USER if exists 'maria.garcia'@'%';
-CREATE USER if not exists 'maria.garcia'@'%' IDENTIFIED BY 'Bez12345.';
-GRANT 'Bezeroa' TO 'Bezero'@'%';
-drop USER if exists 'carlos.martinez'@'%';
-CREATE USER if not exists 'carlos.martinez'@'%' IDENTIFIED BY 'Bez12345.';
-GRANT 'Bezeroa' TO 'Bezero'@'%';
-drop USER if exists 'clara.escudero'@'%';
-CREATE USER if not exists 'clara.escudero'@'%' IDENTIFIED BY 'Bez12345.';
-GRANT 'Bezeroa' TO 'Bezero'@'%';
-drop USER if exists 'asier.martinez'@'%';
-CREATE USER if not exists 'asier.martinez'@'%' IDENTIFIED BY 'Bez12345.';
-GRANT 'Bezeroa' TO 'Bezero'@'%';
-drop USER if exists 'miguel.perez'@'%';
-CREATE USER if not exists 'miguel.perez'@'%' IDENTIFIED BY 'Bez12345.';
-GRANT 'Bezeroa' TO 'Bezero'@'%';
+-- Bezero erabiltzailea sortzea edo berria ezartzea
+DROP USER IF EXISTS 'unai.souto'@'%';
+CREATE USER IF NOT EXISTS 'unai.souto'@'%' IDENTIFIED BY 'Bez12345.';
+GRANT 'Bezeroa' TO 'unai.souto'@'%';
+
+-- Bezero erabiltzailea sortzea edo berria ezartzea
+DROP USER IF EXISTS 'iker.sanchez'@'%';
+CREATE USER IF NOT EXISTS 'iker.sanchez'@'%' IDENTIFIED BY 'Bez12345.';
+GRANT 'Bezeroa' TO 'iker.sanchez'@'%';
+
+-- Bezero erabiltzailea sortzea edo berria ezartzea
+DROP USER IF EXISTS 'juan.perez'@'%';
+CREATE USER IF NOT EXISTS 'juan.perez'@'%' IDENTIFIED BY 'Bez12345.';
+GRANT 'Bezeroa' TO 'juan.perez'@'%';
+
+-- Bezero erabiltzailea sortzea edo berria ezartzea
+DROP USER IF EXISTS 'maria.garcia'@'%';
+CREATE USER IF NOT EXISTS 'maria.garcia'@'%' IDENTIFIED BY 'Bez12345.';
+GRANT 'Bezeroa' TO 'maria.garcia'@'%';
+
+-- Bezero erabiltzailea sortzea edo berria ezartzea
+DROP USER IF EXISTS 'carlos.martinez'@'%';
+CREATE USER IF NOT EXISTS 'carlos.martinez'@'%' IDENTIFIED BY 'Bez12345.';
+GRANT 'Bezeroa' TO 'carlos.martinez'@'%';
+
+-- Bezero erabiltzailea sortzea edo berria ezartzea
+DROP USER IF EXISTS 'clara.escudero'@'%';
+CREATE USER IF NOT EXISTS 'clara.escudero'@'%' IDENTIFIED BY 'Bez12345.';
+GRANT 'Bezeroa' TO 'clara.escudero'@'%';
+
+-- Bezero erabiltzailea sortzea edo berria ezartzea
+DROP USER IF EXISTS 'asier.martinez'@'%';
+CREATE USER IF NOT EXISTS 'asier.martinez'@'%' IDENTIFIED BY 'Bez12345.';
+GRANT 'Bezeroa' TO 'asier.martinez'@'%';
+
+-- Bezero erabiltzailea sortzea edo berria ezartzea
+DROP USER IF EXISTS 'miguel.perez'@'%';
+CREATE USER IF NOT EXISTS 'miguel.perez'@'%' IDENTIFIED BY 'Bez12345.';
+GRANT 'Bezeroa' TO 'miguel.perez'@'%';
 
 FLUSH PRIVILEGES;
+
