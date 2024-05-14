@@ -214,3 +214,13 @@ constraint FK_EstadistikakUrtea foreign key (ID_Audio) references Erreprodukzio_
 
 
 
+
+CREATE INDEX idx_erabiltzailea_bezeroa ON Bezeroa (Erabiltzailea);
+CREATE INDEX idx_join_musika_album_abestia_audio_erreprodukzioak ON Musikaria (ID_Musikaria);
+CREATE INDEX idx_id_list_playlist_abestiak ON Playlist_Abestiak (ID_List);
+CREATE INDEX idx_join_podcaster_podcast_erreprodukzioak ON Podcaster (ID_Podcaster);
+CREATE INDEX idx_id_album_abestia ON Abestia (ID_Album);
+CREATE INDEX idx_join_album_abestia_audio ON Album (ID_Album);
+CREATE INDEX idx_id_audio_podcast ON Podcast (ID_Audio);
+
+

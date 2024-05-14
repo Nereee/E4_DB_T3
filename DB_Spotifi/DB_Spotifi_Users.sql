@@ -58,10 +58,13 @@ FLUSH PRIVILEGES;
 
 
 -- Users
-
 drop USER if exists 'Admin'@'%';
 CREATE USER if not exists 'Admin'@'%' IDENTIFIED BY 'Admin12345.';
 GRANT 'Administratzailea' TO 'Admin'@'%';
+
+drop USER if exists 'a'@'%';
+CREATE USER if not exists 'a'@'%' IDENTIFIED BY 'a';
+GRANT 'Administratzailea' TO 'a'@'%';
 
 drop USER if exists 'Departamentua'@'%';
 CREATE USER if not exists 'Departamentua'@'%' IDENTIFIED BY 'Depart12345.';
