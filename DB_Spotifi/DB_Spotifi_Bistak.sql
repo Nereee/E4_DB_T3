@@ -30,8 +30,8 @@ GROUP BY p.ID_List;
 DROP VIEW IF EXISTS podcastDeskubritu;
 CREATE VIEW podcastDeskubritu AS 
 SELECT p.Izen_artistikoa AS 'Podcasterra', COUNT(e.ID_Audio) AS 'Erreprodukzioak'
-FROM Podcaster p INNER JOIN Podcast po USING(ID_Podcaster)
-					INNER JOIN Erreprodukzioak e USING(ID_Audio)
+FROM Podcaster p LEFT JOIN Podcast po USING(ID_Podcaster)
+					LEFT JOIN Erreprodukzioak e USING(ID_Audio)
 GROUP BY p.Izen_artistikoa;
 
 -- Albumen informazioa lortzeko.
