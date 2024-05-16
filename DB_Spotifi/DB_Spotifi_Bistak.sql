@@ -38,8 +38,8 @@ GROUP BY p.Izen_artistikoa;
 DROP VIEW IF EXISTS AlbumView;
 CREATE VIEW AlbumView AS
 SELECT a.ID_Album AS 'ID_Album', a.Izenburua AS 'Izenburua', COUNT(ab.ID_Audio) AS 'Abestiak', m.ID_Musikaria
-FROM Album a INNER JOIN Abestia ab USING(ID_Album)
-		INNER JOIN Musikaria m USING(ID_Musikaria)
+FROM Album a LEFT JOIN Abestia ab USING(ID_Album)
+		LEFT JOIN Musikaria m USING(ID_Musikaria)
 GROUP BY a.ID_Album;
 
 -- Albumen informazio osatua lortzeko.
@@ -56,3 +56,10 @@ CREATE VIEW PodcastIkusi AS
 SELECT a.ID_Audio AS ID_Audio, a.Izena AS Izena, a.Iraupena AS Iraupena, p.ID_Podcaster AS ID_Podcaster, p.Kolaboratzaileak AS Kolaboratzaileak, a.Irudia AS Irudia
 FROM Audio a INNER JOIN Podcast p USING(ID_Audio)
 WHERE a.mota = 'Podcast';
+
+
+-- Estadistikak ikusteko.
+DROP VIEW IF EXISTS EstadistikakIkusi;
+CREATE VIEW EstadistikakIkusi AS
+SELECT a.ID_Audio AS ID_Audio, a.Izena AS Izena, e.Erreprodukzio_Kop_Egunero AS Erreprodukzio_Kop_Egunero, e.Erreprodukzio_Kop_Hilabetero AS Erreprodukzio_Kop_Hilabetero, e.Erreprodukzio_Kop_Urtero AS Erreprodukzio_Kop_Urtero
+FROM Audio a JOIN Estadistikak e USING(ID_Audio);

@@ -187,3 +187,10 @@ VALUES
 ('AU4', '2024', 5),
 ('AU7', '2024', 9),
 ('AU8', '2024', 5);
+
+INSERT INTO Estadistikak (ID_Audio, Erreprodukzio_Kop_Egunero, Erreprodukzio_Kop_Hilabetero, Erreprodukzio_Kop_Urtero) 
+VALUES 
+('AU3', '1000', 4300, 2398542),
+('AU4', '1500', 34242, 452342),
+('AU7', '2500', 43234, 894574),
+('AU8', '350', 44433, 1000023);
