@@ -45,7 +45,7 @@ GROUP BY a.ID_Album;
 -- Albumen informazio osatua lortzeko.
 DROP VIEW IF EXISTS AlbumInfo;
 CREATE VIEW AlbumInfo AS
-SELECT a.ID_Album AS 'ID_Album', a.Izenburua AS 'Izenburua', a.Urtea AS 'Urtea', COUNT(ab.ID_Audio) AS 'AbestiKop', SUM(au.Iraupena) AS 'Iraupena', a.Irudia AS 'Irudia', a.Deskripzioa AS 'Deskribapena'
+SELECT a.ID_Album AS 'ID_Album', a.Izenburua AS 'Izenburua', a.Urtea AS 'Urtea', a.Generoa AS 'Generoa', COUNT(ab.ID_Audio) AS 'AbestiKop', SUM(au.Iraupena) AS 'Iraupena', a.Irudia AS 'Irudia', a.Deskripzioa AS 'Deskribapena'
 FROM Album a INNER JOIN Abestia ab USING(ID_Album)
 		INNER JOIN Audio au USING(ID_Audio)
 GROUP BY a.ID_Album;
