@@ -29,7 +29,7 @@ GROUP BY p.ID_List;
 -- Podcasterren podcasten erreprodukzio kopurua ikusteko.
 DROP VIEW IF EXISTS podcastDeskubritu;
 CREATE VIEW podcastDeskubritu AS 
-SELECT p.Izen_artistikoa AS 'Podcasterra', COUNT(e.ID_Audio) AS 'Erreprodukzioak'
+SELECT p.Izen_artistikoa AS 'Podcasterra', COUNT(e.ID_Audio) AS 'Erreprodukzioak', p.ID_Podcaster AS 'ID'
 FROM Podcaster p LEFT JOIN Podcast po USING(ID_Podcaster)
 					LEFT JOIN Erreprodukzioak e USING(ID_Audio)
 GROUP BY p.Izen_artistikoa;
