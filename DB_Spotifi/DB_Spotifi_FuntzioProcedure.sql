@@ -55,6 +55,55 @@ BEGIN
     END IF;
 END//
 
+-- SALBUESPENAK --
+# Salbuespen honek insert bat egiterakoan Bezero taulari ez edukitzea erabiltzaile izen berdina.
+DELIMITER //
+DROP PROCEDURE IF EXISTS insertErabiltzailea//
+CREATE PROCEDURE insertErabiltzailea(
+-- Bezero bat sortzeko datuak hartzen ditu
+    IN e_izena VARCHAR(20),
+    IN e_abizena VARCHAR(20),
+    IN e_hizkuntza ENUM('ES', 'EU', 'EN', 'FR', 'DE', 'CA', 'GA', 'AR'),
+    IN e_erabiltzailea VARCHAR(20),
+    IN e_pasahitza VARCHAR(100),
+    IN e_jaiotze_data DATE,
+    IN e_erregistro_data DATE,
+    IN e_mota ENUM('Free', 'Premium')
+)
+BEGIN
+	-- deklaratzen dugu kondizioa gako unikoentzako (23000), kasu honetan, erabiltzaile izena berdina izatea
+	DECLARE	usernameBerdina CONDITION FOR SQLSTATE '23000';
+    
+    -- Aurrekoa gertatzen bada, handler bat sortzen dugu errore mesua ateratzeko
+    DECLARE CONTINUE HANDLER FOR usernameBerdina
+    BEGIN
+		SELECT 'Errorea. Erabiltzaile izena hartuta dago.';
+    END;
+    -- Erabiltzaile izena desberdina bada, insert-a egingo da problema barik.
+    INSERT INTO Bezeroa (Izen, Abizena, Hizkuntza, Erabiltzailea, Pasahitza, Jaiotze_data, Erregistro_data, Mota)
+    VALUES (e_izena, e_abizena, e_hizkuntza, e_erabiltzailea, e_pasahitza, e_jaiotze_data, e_erregistro_data, e_mota);
+END;
+//
+CALL insertErabiltzailea('Juan', 'Pérez', 'AR', 'prueba', 'contraseña', '2000-01-01', '2024-05-14', 'Free');
+
+# Hizkuntza bat ezabatzerakoan, Hizkuntza horrek Bezero batek badu, ezin izango da ezabatu.
+DELIMITER //
+DROP PROCEDURE IF EXISTS ezabatuHizkuntza//
+CREATE PROCEDURE ezabatuHizkuntza(
+    IN h_ID enum("ES", "EU", "EN", "FR", "DE", "CA", "GA", "AR")
+)
+BEGIN
+    DECLARE fk_constraint_violation CONDITION FOR SQLSTATE '23000';
+
+    DECLARE EXIT HANDLER FOR fk_constraint_violation
+    BEGIN
+        SELECT 'Errorea: ezin da hizkuntza ezabatu, beste taula batzuetan erlazionatutako erregistroak dituelako';
+    END;
+
+    DELETE FROM Hizkuntza WHERE ID_Hizkuntza = h_ID;
+END;
+//
+call ezabatuHizkuntza("AR");
 
 
 
