@@ -58,6 +58,7 @@ ID_Audio char(5),
 Izena varchar(150) not null,
 Iraupena int not null,
 Irudia longblob,
+Deskribapena varchar(1000) not null default "deskripziorik ez",
 Mota enum("Podcast", "Abestia") not null,
 primary key(ID_Audio)
 );
@@ -81,6 +82,7 @@ Izenburua varchar(20) not null,
 Urtea date not null,
 Generoa varchar(40) not null,
 Irudia blob,
+Deskripzioa varchar(200) not null,
 ID_Musikaria char(5) not null,
 primary key(ID_Album)
 );
@@ -115,11 +117,31 @@ primary key(ID_Erreprodukzioak)
 
 create table Estadistikak(
 ID_Audio char(5),
-KeyFigure1 varchar(1), 
-KeyFigure2 varchar(1),
-KeyFigure3 varchar(1),
-KeyFigure4 varchar(1),
+Erreprodukzio_Kop_Egunero long, 
+Erreprodukzio_Kop_Hilabetero long,
+Erreprodukzio_Kop_Urtero long,
 primary key(ID_Audio)
+);
+
+create table Erreprodukzio_Eguna(
+ID_Audio char(5),
+Eguna date not null, 
+Erreprodukzio_Kop long not null,
+primary key(ID_Audio, Eguna)
+);
+
+create table Erreprodukzio_Hilabete(
+ID_Audio char(5),
+Hilabetea date not null, 
+Erreprodukzio_Kop long not null,
+primary key(ID_Audio, Hilabetea)
+);
+
+create table Erreprodukzio_Urtea(
+ID_Audio char(5),
+Urtea year not null, 
+Erreprodukzio_Kop long not null,
+primary key(ID_Audio, Urtea)
 );
 
 
@@ -182,4 +204,23 @@ constraint FK_ErreprodukzioakAudio foreign key (ID_Audio) references Audio (ID_A
 
 alter table Estadistikak
 add
-constraint FK_EstadistikakAudio foreign key (ID_Audio) references Audio (ID_Audio) on update cascade on delete cascade;
+constraint FK_EstadistikakAudio foreign key (ID_Audio) references Audio (ID_Audio) on update cascade,
+add
+constraint FK_EstadistikakEguna foreign key (ID_Audio) references Erreprodukzio_Eguna (ID_Audio) on update cascade,
+add
+constraint FK_EstadistikakHilabete foreign key (ID_Audio) references Erreprodukzio_Hilabete (ID_Audio) on update cascade,
+add
+constraint FK_EstadistikakUrtea foreign key (ID_Audio) references Erreprodukzio_Urtea (ID_Audio) on update cascade;
+
+
+
+
+CREATE INDEX idx_erabiltzailea_bezeroa ON Bezeroa (Erabiltzailea);
+CREATE INDEX idx_join_musika_album_abestia_audio_erreprodukzioak ON Musikaria (ID_Musikaria);
+CREATE INDEX idx_id_list_playlist_abestiak ON Playlist_Abestiak (ID_List);
+CREATE INDEX idx_join_podcaster_podcast_erreprodukzioak ON Podcaster (ID_Podcaster);
+CREATE INDEX idx_id_album_abestia ON Abestia (ID_Album);
+CREATE INDEX idx_join_album_abestia_audio ON Album (ID_Album);
+CREATE INDEX idx_id_audio_podcast ON Podcast (ID_Audio);
+
+
